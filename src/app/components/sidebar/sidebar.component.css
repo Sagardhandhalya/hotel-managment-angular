@@ -28,7 +28,10 @@ ul,li{
   }
   
   .hotel-avatar{
-      width: 60%;
-      height: 60%;
+      width: 80%;
+      height: 80%;
       border: none;
+      margin: 25px;
+      background-color: white;
+      border-radius: 50%;
   }
