@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder , Validators , FormArray } from '@angular/forms'
+import { FormvalidationService } from 'src/app/services/validation/formvalidation.service';
 @Component({
   selector: 'app-addguestform',
   templateUrl: './addguestform.component.html',
@@ -7,26 +8,30 @@ import {FormBuilder , Validators , FormArray } from '@angular/forms'
 })
 export class AddguestformComponent implements OnInit {
 
-  constructor(private fb : FormBuilder) { }
+  constructor(private fb : FormBuilder , private formvalidation : FormvalidationService) { }
 
   ngOnInit() {
   }
+log(d)
+{
+console.log(d);
 
+}
 
   newtenant = this.fb.group({
     HeadDetails: this.fb.group({
-      headName: ["" , Validators.required],
-      headGender: [""],
-      headContactno: [""],
-      checkinDate: ["select date",Validators.required],
-      checkoutDate: ["select date",Validators.required],
-      address:[''],
-      roomNo : ['',Validators.required]
-    }),
+      headName: ["" ,  this.formvalidation.validateName],
+      headGender: ["" , Validators.required],
+      headContactno: ["",this.formvalidation.validateContactno],
+      checkinDate: ["select date",   Validators.compose([Validators.required , this.formvalidation.validateDate]) ],
+      checkoutDate: ["select date",Validators.compose([Validators.required , this.formvalidation.validateDate])],
+      address:['' , Validators.required],
+      roomNo : ['',this.formvalidation.validateRoomno]
+    }, {validators : this.formvalidation.validatedaterange}),
     SpouseDetails: this.fb.group({
-      spouseName: [""],
+      spouseName: ["",this.formvalidation.validateSpouseName],
       spouseGender: [""],
-      spouseContactno: [""],
+      spouseContactno: ["",this.formvalidation.validateSpouseContactno],
     }),
     ChildrenDetails: this.fb.array([
       
@@ -36,17 +41,19 @@ export class AddguestformComponent implements OnInit {
     return this.newtenant.get('ChildrenDetails') as FormArray;
   }
 
-  addchild(){
+  addChild(){
+  
+    
     this.ChildrenDetails.push(
       this.fb.group({
-        childName: [""],
-        childGender: [""],
-        childAge: [""],
+        childName: ["" , this.formvalidation.validateName],
+        childGender: ["" ,Validators.required],
+        childAge: ["", this.formvalidation.validateChildAge],
       }),
     )
   }
 
-  removechild(index){
+  removeChild(index){
     this.ChildrenDetails.removeAt(index)
   }
 
@@ -54,5 +61,45 @@ export class AddguestformComponent implements OnInit {
     console.log(data);
     
   }
+
+
+  // all the error getters .....
+
+
+  get headName()
+  {
+    return this.newtenant.get('HeadDetails').get('headName');
+  }
+
+  get roomNO()
+  {
+    return this.newtenant.get('HeadDetails').get('roomNo')
+  }
+
+  get address()
+  {
+    return this.newtenant.get('HeadDetails').get('address')
+  }
+
+  get headContactNo()
+  {
+    return this.newtenant.get('HeadDetails').get('headContactno')
+  }
+ 
+  get checkinDate()
+  {
+    return this.newtenant.get('HeadDetails').get('checkinDate')
+  }
+  get checkoutDate()
+  {
+    return this.newtenant.get('HeadDetails').get('checkoutDate')
+  }
+
+ get headDetails()
+ {
+   return this.newtenant.get('HeadDetails')
+ }
+
+  
 
 }

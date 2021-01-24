@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { SidebarService } from 'src/app/services/sidebar/sidebar.service';
+import { Component, OnInit, Output ,EventEmitter } from '@angular/core';
+import { THROW_IF_NOT_FOUND } from '@angular/core/src/di/injector';
 
 @Component({
   selector: 'app-header',
@@ -8,18 +8,19 @@ import { SidebarService } from 'src/app/services/sidebar/sidebar.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public sideser : SidebarService ) { }
+  constructor() { }
+
+  sidebarOn =  true
+  
+  @Output() sidebarToggleEvent  = new EventEmitter<boolean> ();
 
   ngOnInit() {
   }
 
-  switch(){
-    console.log("pressed...");
-    
-    this.sideser.toggle()
-
-    console.log(this.sideser.getstate());
-    
+  toggleSidebar(){
+    this.sidebarOn = !this.sidebarOn;
+    this.sidebarToggleEvent.emit(this.sidebarOn)
   }
+  
  
 }

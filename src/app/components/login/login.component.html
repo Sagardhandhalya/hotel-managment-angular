@@ -27,7 +27,7 @@
                 role="alert"
               ></div>
               <img
-                src="../assets/ht1.png"
+                src="../../../assets/x.jpg"
                 class="rounded-circle d-block img-thumbnail mx-auto mb-3 hotel-avatar"
                 alt="image"
               />
@@ -51,7 +51,10 @@
                     placeholder="Email or username"
                     formControlName="email"
                   />
+
                 </div>
+                <div class="text-danger" style="text-align: left;"  *ngIf="email.invalid && (email.dirty || email.touched) ">{{email.errors.err}}</div>
+
                 <div class="input-group mt-3 outline-0">
                   <span class="input-group-text">%</span>
                   <input
@@ -60,7 +63,10 @@
                     type="password"
                     formControlName="password"
                   />
+
                 </div>
+                <div class="text-danger" style="text-align: left;" *ngIf="password.invalid && (password.dirty || password.touched) ">{{password.errors.err}}</div>
+
   
                 <div class="form-group mt-4">
                   <button

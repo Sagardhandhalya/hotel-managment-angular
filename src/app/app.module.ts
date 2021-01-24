@@ -11,7 +11,7 @@ import { AddguestformComponent } from './components/addguestform/addguestform.co
 import { GuesttableComponent } from './components/guesttable/guesttable.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {FetchguestService } from './services/fetchguest/fetchguest.service'
-import { SidebarService } from './services/sidebar/sidebar.service'
+import { FormvalidationService } from './services/validation/formvalidation.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,7 @@ import { SidebarService } from './services/sidebar/sidebar.service'
     AppRoutingModule,
     ReactiveFormsModule
   ],
-  providers: [FetchguestService,SidebarService],
+  providers: [FetchguestService , FormvalidationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SidebarService } from 'src/app/services/sidebar/sidebar.service';
 
 @Component({
   selector: 'app-adminlayout',
@@ -8,11 +7,16 @@ import { SidebarService } from 'src/app/services/sidebar/sidebar.service';
 })
 export class AdminlayoutComponent implements OnInit {
 
-  constructor(private sidebarsrc : SidebarService ) { }
+  constructor( ) { }
 
   ngOnInit() {
   }
 
-    sidebarstate = this.sidebarsrc.sidebarstate;
+  sidebaropen : boolean = true;
+  log(state)
+  {
+    this.sidebaropen = state;
+  }
+
 
 }

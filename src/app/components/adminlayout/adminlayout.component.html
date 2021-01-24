@@ -1,9 +1,9 @@
 
 
-<app-header ></app-header>
+<app-header (sidebarToggleEvent)="log($event)" ></app-header>
 <div class="d-flex container " style="margin-top: 70px">
-<app-sidebar class="shadow left" [style.display]= "sidebarstate.disp"></app-sidebar>
-<div class="right" [style.marginLeft] = "sidebarstate.ml">
+<app-sidebar class="shadow left" [ngClass]="{'sidebaroff': !sidebaropen}"></app-sidebar>
+<div class="right" [ngClass]="{'sidebarmargin': sidebaropen}">
 <router-outlet></router-outlet>
 
 </div>

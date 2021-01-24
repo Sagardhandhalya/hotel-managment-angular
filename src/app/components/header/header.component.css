@@ -2,7 +2,9 @@
     position: relative;
     display: inline-block;
   }
-  
+  button{
+    outline: none;
+  }
   .dropdown-content {
     display: none;
     position: absolute;
@@ -22,4 +24,8 @@
 
   .lightblue{
     background-color:  rgb(228, 99, 206);
+  }
+
+  .marginl{
+    margin-left: 180px;
   }
